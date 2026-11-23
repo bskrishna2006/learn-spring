@@ -1,5 +1,6 @@
 package dev.learn.something;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -36,5 +37,15 @@ public class TodoController {
     @DeleteMapping("/delete/{id}")
     String deleteTask(@PathVariable long id){
         return "task with id " + id + " deleted";
+    }
+
+
+    //Getmapping to illustrate Autowiring from todoservice class
+    @Autowired
+    private TodoService todoService;
+    @GetMapping("/get")
+    public String getTasks(){
+        todoService.printTodo();
+        return "Tasks returned from autowired method";
     }
 }
